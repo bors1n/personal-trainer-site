@@ -31,6 +31,9 @@ static/
 
 # Environment variables
 .env
+.env.local
+.env.prod
+.env.*
 
 # IDE
 .idea/
