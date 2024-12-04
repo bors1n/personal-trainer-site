@@ -1,0 +1,63 @@
+{%load static%}
+<div class="w-full bg-base-100">
+    <section id="reviews" class="min-h-screen flex items-center py-12">
+        <div class="container mx-auto px-4 sm:px-6 max-w-5xl">
+            <!-- Section Header -->
+            <div class="text-center mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-[#4A2B29] mb-2">
+                    Отзывы
+                </h2>
+                <p class="text-base max-w-2xl mx-auto">
+                    Что говорят мои клиенты
+                </p>
+            </div>
+
+            <!-- Reviews Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Review Card 1 -->
+                <div class="card bg-base-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <figure class="pt-3">
+                        <img 
+                            src="{% static 'images/feedback.jpg' %}" 
+                            alt="Отзыв 2" 
+                            class="rounded-lg w-full h-[200px] object-cover"
+                        />
+                    </figure>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="card bg-base-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <figure class="pt-3">
+                        <img 
+                            src="{% static 'images/feedback-1.jpg' %}" 
+                            alt="Отзыв 2" 
+                            class="rounded-lg w-full h-[200px] object-cover"
+                        />
+                    </figure>
+                </div>
+
+                <!-- Review Card 3 -->
+                <div class="card bg-base-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <figure class="pt-3">
+                        <img 
+                            src="{% static 'images/feedback-4.jpg' %}" 
+                            alt="Отзыв 3" 
+                            class="rounded-sm w-full h-[200px] object-cover"
+                        />
+                    </figure>
+                </div>
+
+                <!-- Review Card 4 -->
+                <div class="card bg-base-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <figure class="pt-3">
+                        <img 
+                            src="{% static 'images/feedback-3.jpg' %}" 
+                            alt="Отзыв 4" 
+                            class="rounded-lg w-full h-[200px] object-cover"
+                        />
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

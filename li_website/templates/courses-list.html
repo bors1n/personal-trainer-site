@@ -1,0 +1,44 @@
+{% load static %}
+<section id="courses" class="min-h-screen py-16 bg-base-200">
+    <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#4A2B29] mb-4">
+                Тренировки
+            </h2>
+            <p class="text-base sm:text-lg max-w-2xl mx-auto">
+                Выберите тренировку, который подходит именно вам
+            </p>
+        </div>
+
+        <!-- Course Cards Grid -->   
+         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {%for course in courses%}
+            <div class="card card-compact bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                <figure>
+                    <img src="{{ course.image.url }}" alt="{{ course.title }}" alt="{{course.title}}" class="w-full h-48 object-cover">
+                </figure>
+                <div class="card-body">
+                    <h3 class="card-title text-xl font-semibold text-[#4A2B29]">
+                        {{course.title}}
+                    </h3>
+                    <p class="text-base"> {{course.summary}}</p>
+                    <div class="flex flex-col space-y-2 mt-4">
+                        <div class="flex items-center gap-2">
+                            <span>🕒 {{course.duration}} недель</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span>💰 {{course.price}} ₽</span>
+                        </div>
+                        <div class="card-actions justify-end mt-4">
+                            <a href="{% url 'courses:course_page' course.slug %}" class="btn btn-primary">
+                                Подробнее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+         </div>
+    </div>
+</section>

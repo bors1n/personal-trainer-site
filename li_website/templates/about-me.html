@@ -1,0 +1,58 @@
+{% load static %}
+<div class="w-full bg-base-100">
+    <section id="about" class="min-h-screen flex items-center">
+        <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Image (Left Side) -->
+                <div class="flex-1 lg:max-w-[50%]">
+                    <div class="relative rounded-lg overflow-hidden shadow-xl">
+                        <img 
+                            src="{% static 'images/about-me.jpg' %}"
+                            alt="Лилия - персональный тренер"
+                            class="w-full h-[400px] object-cover object-center rounded-lg transition-transform hover:scale-105 duration-300"
+                        /> 
+                    </div>
+                </div>
+
+                <!-- Text Content (Right Side) -->
+                <div class="flex-1 text-center lg:text-left">
+                    <div class="space-y-8">
+                        <!-- Personal Introduction -->
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-semibold text-[#4A2B29]">Привет, я Лилия!</h3>
+                            <p class="text-base sm:text-lg">
+                                Ваш персональный тренер. Помогаю улучшать здоровье, исправлять осанку и делать тренировки понятными и эффективными.
+                            </p>
+                        </div>
+
+                        <!-- Experience and Achievements -->
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-semibold text-[#4A2B29]">Опыт</h3>
+                            <p class="text-base sm:text-lg">
+                                Уже больше двух лет работаю с клиентами разного уровня подготовки. Я дипломированный тренер.
+                            </p>
+                        </div>
+
+                        <!-- Approach and Philosophy -->
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-semibold text-[#4A2B29]">Мой подход</h3>
+                            <p class="text-base sm:text-lg">
+                                Мои тренировки — это осознанный процесс, где важна правильная техника, индивидуальный подход и забота о здоровье. Вместе мы достигнем ваших целей с комфортом и удовольствием.
+                            </p>
+                        </div>
+
+                        <!-- Call to Action -->
+                        <div class="pt-4">
+                            <a href="{% url 'home' %}#courses" class="btn btn-primary">
+                                Посмотреть мои курсы
+                            </a>
+                            <a href="{% url 'home' %}#contact"  class="btn btn-secondary">
+                                Связаться со мной
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

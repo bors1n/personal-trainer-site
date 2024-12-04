@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="valentine" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}Лилия Борсина - Ваш персональный фитнес тренер{% endblock %} | Помогаю улучшать здоровье и осанку</title>
+    <meta name="description" content="{% block meta_description %}Лилия Борсина - персональный тренер с более чем двухлетним опытом. Помогаю улучшать здоровье, исправлять осанку и делать тренировки эффективными и безопасными.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}персональный тренер, тренировки для здоровья, исправление осанки, эффективные тренировки, фитнес с тренером{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}Лилия Борсина - Ваш персональный тренер{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Лилия Борсина - дипломированный тренер. Индивидуальный подход, правильная техника и забота о здоровье для достижения ваших целей.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/about-me.jpg' %}{% endblock %}">
+        
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="min-h-screen bg-base-100">
+    {% include 'nav-bar.html' %}
+
+    <main class="min-h-screen">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% include 'footer.html' %}
+    
+    {% if debug %}
+    <script src="{% static 'django-browser-reload/reload.js' %}"></script>
+    {% endif %}
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

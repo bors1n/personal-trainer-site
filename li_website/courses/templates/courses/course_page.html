@@ -1,0 +1,170 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/course-payment.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<section class="bg-base flex items-center relative min-h-[80vh]">
+    <div class="py-8 sm:py-12 w-full">
+        <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+            <div class="flex flex-col-reverse lg:flex-row-reverse items-center gap-6 sm:gap-8">
+                <!-- Text (Right Side) -->
+                 <div class="flex-1 text-center lg:text-left space-y-4 sm:space-y-6">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                        {{ course.title }}
+                    </h1>
+                    <p class="text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
+                        {{ course.description|safe }}
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        {% if has_purchased %}
+                            <div class="text-success font-semibold">
+                                ✓ Вы приобрели этот курс 
+                            </div>
+                            <a href="{% url 'courses:full_course' course.slug %}" class="btn btn-primary">
+                                Смотреть полный курс
+                            </a>
+                        {% else %}
+                            <button type="button" onclick="purchaseCourse('{{ course.title }}', {{ course.price }})" class="btn btn-primary">
+                                Заказать курс
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </button>
+                            <a href="#free_part" class="btn btn-secondary">
+                                Попробовать бесплатно
+                            </a>
+                        {% endif %}
+                 </div>
+            </div>
+            <!-- Vedio (left Side)-->
+            <div class="flex-1 w-full lg:w-auto mb-6 lg:mb-0">
+                <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl">
+                    {% if course.link_video %}
+                        <iframe 
+                            src="{{ course.get_embed_url }}"
+                            class="w-full h-full rounded-lg"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Scroll Down Arrow -->
+     <div class="hidden sm:block absolute bottom-2 left-1/2 transform -translate-x-1/2 space-y-2">
+        <a href="#more-content" class="group">
+            <svg class="w-6 h-6 text-primary animate-bounce transition-colors duration-200 group-hover:text-primary-focus" 
+                 fill="none" 
+                 stroke="currentColor" 
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<!-- Expectation -->
+<section id="more-content" class="py-16 bg-base-100">
+    <div class="container mx-auto px-4 max-w-7xl">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">Что будет на курсе</h2>
+            <div class="divider"></div>
+        </div>
+
+        <!-- Two Columns -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- Course Content Column -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h3 class="card-title text-2xl mb-4">Контент</h3>
+                    <ul class="max-w-md space-y-3 list-disc list-outside">
+                        <li>
+                            <p><strong>12 видео с упражнениями:</strong> Короткие инструкции как правильно выполнять упражнения для каждого модуля
+                            </p>
+                        </li>
+                        <li>
+                            <p><strong>Определение проблемных зон:</strong> На начальном этапе курса вы сможете определить слабые места на которые стоит обратить внимание.</p>
+                        </li>
+                        <li>
+                            <p><strong>4 видео с объяснениями:</strong> Подробные разъяснения правильной техники выполнения упражнений и особенности осознанного тренинга.</p>
+                        </li>
+                        <li>
+                            <p><strong>Текстовая часть курса:</strong> Полезные рекомендации и теоретическая информация.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Expected Results Column -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <ul class="max-w-md space-y-3 list-disc list-outside">
+                    <h3 class="card-title text-2xl mb-4">Чего можено добиться пройдя курс</h3>
+                    <li>
+                        <p><strong>Исправление осанки:</strong> Снижение сутулости, улучшение положения плеч и шеи.
+                        </p>
+                    </li>
+                    <li>
+                        <p><strong>Снижение боли в спине и шее:</strong>  Регулярные упражнения помогут уменьшить дискомфорт и напряжение в мышцах.</p>
+                    </li>
+                    <li>
+                        <p><strong>Укрепление основных мышц:</strong> Повышение силы и выносливости мышц, поддерживающих позвоночник, что положительно скажется на вашей осанке и общем тонусе тела.</p>
+                    </li>
+                    <li>
+                        <p><strong>Осознанность в движениях:</strong> Вы научитесь контролировать своё тело и двигаться так, чтобы поддерживать правильную осанку даже в повседневной жизни.</p>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Free Content Section -->
+<section id="free_part" class="py-8 bg-base-100">
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="text-center mb-6">
+            <h2 class="text-3xl font-bold mb-4">Попробуйте бесплатно</h2>
+            <div class="divider"></div>
+        </div>
+        
+        <!-- Collapse Component for Free Content -->
+        <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+            <input type="checkbox" /> 
+            <div class="collapse-title text-xl font-medium">
+                Бесплатная часть курса
+            </div>
+            <div class="collapse-content">
+                <p class="text-base sm:text-lg mt-4">
+                    {{ course.free_content|safe }}
+                </p>
+
+                <!-- Order Course Button -->
+                <div class="mt-6 text-center">
+                        <button type="button" onclick="purchaseCourse('{{ course.title }}', {{ course.price }})" class="btn btn-primary">
+                            Заказать курс
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% include 'footer.html' %}

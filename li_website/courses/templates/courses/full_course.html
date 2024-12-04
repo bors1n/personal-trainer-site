@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}{{ course.title }} - Полный курс{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold mb-4">{{ course.title }}</h1>
+        <div class="text-success mb-4">✓ Полная версия курса</div>
+    </div>
+
+    <div class="prose max-w-none">
+        {{ course.full_course|safe }}
+    </div>
+
+    <div class="mt-8">
+        <a href="{% url 'home' %}#courses" class="btn btn-outline">
+            Посмотреть все тренировки
+        </a>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="bg-base-100 min-h-[80vh] flex items-center">
+    <div class="container mx-auto px-4 py-16">
+        <div class="max-w-2xl mx-auto">
+            {% if status == 'success' %}
+                <div class="text-center mb-8">
+                    <h1 class="text-4xl font-bold mb-4">Успешная оплата!</h1>
+                    <p class="text-xl mb-8">{{ message }}</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="{% url 'courses:full_course' course_slug %}" 
+                           class="btn btn-primary btn-lg">
+                            Перейти к тренировки
+                        </a>
+                        <a href="{% url 'home' %}#courses" 
+                           class="btn btn-outline btn-lg">
+                            Посмотреть все тренировки
+                        </a>
+                    </div>
+                </div>
+            {% elif status == 'pending' %}
+                <div class="text-center mb-8">
+                    <h1 class="text-4xl font-bold mb-4">Обработка платежа</h1>
+                    <p class="text-xl mb-8">{{ message }}</p>
+                    <div class="flex justify-center">
+                        <div class="loading loading-spinner loading-lg"></div>
+                    </div>
+                </div>
+                <script>
+                    (function checkPaymentStatus() {
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
+                    })();
+                </script>
+            {% else %}
+                <div class="text-center mb-8">
+                    <h1 class="text-4xl font-bold mb-4">Платеж не удался</h1>
+                    <p class="text-xl mb-8">{{ message }}</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="javascript:history.back()" 
+                           class="btn btn-error btn-lg">
+                            Вернуться к тренировке
+                        </a>
+                        <a href="{% url 'home' %}#courses" 
+                           class="btn btn-outline btn-lg">
+                            Посмотреть все тренировки
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
