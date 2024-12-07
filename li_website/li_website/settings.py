@@ -14,6 +14,10 @@ from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Load environment variables
 try:
     from dotenv import load_dotenv
@@ -24,9 +28,6 @@ try:
     load_dotenv(env_path)
 except ImportError:
     pass
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
