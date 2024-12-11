@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 40px; /* Adjust based on header height */
+}
+
+body {
+    overflow-x: hidden;
+}
+
+@layer components {
+    .aspect-w-16 {
+      position: relative;
+      padding-bottom: 56.25%;
+    }
+    .aspect-w-16 iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
