@@ -14,3 +14,6 @@ def home(request):
         'reviews': reviews,
     }
     return render(request, 'home.html', context)
+
+def legal_info(request):
+    return render(request, 'legal_info.html')

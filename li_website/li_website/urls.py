@@ -19,6 +19,7 @@ urlpatterns = [
     path('courses/', include('courses.urls')),
     path('gallery/', include('gallery.urls')),
     path('payments/', include('payments.urls')),
+    path('legal-info/', views.legal_info, name='legal_info')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if DEBUG:
