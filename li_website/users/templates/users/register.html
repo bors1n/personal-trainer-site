@@ -111,6 +111,11 @@
 
         <div class="mt-4 text-center">
             <p>Уже есть аккаунт? <a href="{% url 'login' %}" class="text-primary hover:text-primary-focus">Войти</a></p>
+            <p class="text-sm text-gray-600">
+                Ознакомьтесь с нашими 
+                <a href="{% url 'legal_info' %}#user_agreement" class="text-blue-500 hover:underline">Пользовательским соглашением</a> и 
+                <a href="{% url 'legal_info' %}#privacy_policy" class="text-blue-500 hover:underline">Политикой конфиденциальности</a>.
+            </p>
         </div>
     </div>
 </div>
