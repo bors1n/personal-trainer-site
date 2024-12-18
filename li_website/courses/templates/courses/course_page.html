@@ -76,60 +76,7 @@
 
 <!-- Expectation -->
 <section id="more-content" class="py-16 bg-base-100">
-    <div class="container mx-auto px-4 max-w-7xl">
-        <!-- Section Header -->
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4">Что будет на курсе</h2>
-            <div class="divider"></div>
-        </div>
-
-        <!-- Two Columns -->
-        <div class="grid md:grid-cols-2 gap-8 mb-12">
-            <!-- Course Content Column -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h3 class="card-title text-2xl mb-4">Контент</h3>
-                    <ul class="max-w-md space-y-3 list-disc list-outside">
-                        <li>
-                            <p><strong>12 видео с упражнениями:</strong> Короткие инструкции как правильно выполнять упражнения для каждого модуля
-                            </p>
-                        </li>
-                        <li>
-                            <p><strong>Определение проблемных зон:</strong> На начальном этапе курса вы сможете определить слабые места на которые стоит обратить внимание.</p>
-                        </li>
-                        <li>
-                            <p><strong>4 видео с объяснениями:</strong> Подробные разъяснения правильной техники выполнения упражнений и особенности осознанного тренинга.</p>
-                        </li>
-                        <li>
-                            <p><strong>Текстовая часть курса:</strong> Полезные рекомендации и теоретическая информация.</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Expected Results Column -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <ul class="max-w-md space-y-3 list-disc list-outside">
-                    <h3 class="card-title text-2xl mb-4">Чего можено добиться пройдя курс</h3>
-                    <li>
-                        <p><strong>Исправление осанки:</strong> Снижение сутулости, улучшение положения плеч и шеи.
-                        </p>
-                    </li>
-                    <li>
-                        <p><strong>Снижение боли в спине и шее:</strong>  Регулярные упражнения помогут уменьшить дискомфорт и напряжение в мышцах.</p>
-                    </li>
-                    <li>
-                        <p><strong>Укрепление основных мышц:</strong> Повышение силы и выносливости мышц, поддерживающих позвоночник, что положительно скажется на вашей осанке и общем тонусе тела.</p>
-                    </li>
-                    <li>
-                        <p><strong>Осознанность в движениях:</strong> Вы научитесь контролировать своё тело и двигаться так, чтобы поддерживать правильную осанку даже в повседневной жизни.</p>
-                    </li>
-                </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{course.expectation | safe}}
 </section>
 
 <!-- Free Content Section -->
@@ -147,19 +94,20 @@
                 Бесплатная часть курса
             </div>
             <div class="collapse-content">
-                <p class="text-base sm:text-lg mt-4">
-                    {{ course.free_content|safe }}
-                </p>
-
+                <div class="flex justify-center items-center rounded-lg">
+                    {{course.free_part | safe }}
+                </div>
+                
                 <!-- Order Course Button -->
                 <div class="mt-6 text-center">
+                    {% if not has_purchased %}
                         <button type="button" onclick="purchaseCourse('{{ course.title }}', {{ course.price }})" class="btn btn-primary">
                             Заказать курс
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                             </svg>
                         </button>
-                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

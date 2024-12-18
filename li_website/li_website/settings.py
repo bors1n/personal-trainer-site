@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment variables
 try:
-    from dotenv import load_dotenv
     # Try to load production env first, fallback to local
     env_path = os.path.join(BASE_DIR.parent, '.env.prod')
     if not os.path.exists(env_path):
