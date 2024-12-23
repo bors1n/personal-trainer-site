@@ -61,19 +61,24 @@ class Course(models.Model):
 
     def get_embed_url(self):
         """
-        Convert YouTube URL to embed URL format.
+        Convert YouTube or Rutube URL to embed URL format.
         
-        Handles both standard YouTube URLs and shortened youtu.be links.
+        Handles YouTube URLs (standard and shortened) and Rutube URLs.
         
         Returns:
-            str: YouTube embed URL or original URL if not a YouTube link
+            str: YouTube/Rutube embed URL or original URL if not a supported link
         """
+        # Handle YouTube links
         if 'youtube.com/watch?v=' in self.link_video:
             video_id = self.link_video.split('v=')[1].split('&')[0]
             return f'https://www.youtube.com/embed/{video_id}'
         elif 'youtu.be/' in self.link_video:
             video_id = self.link_video.split('/')[-1]
             return f'https://www.youtube.com/embed/{video_id}'
+        # Handle Rutube links
+        elif 'rutube.ru/video/' in self.link_video:
+            video_id = self.link_video.split('video/')[-1].rstrip('/')
+            return f'https://rutube.ru/play/embed/{video_id}'
         return self.link_video
 
 class Purchase(models.Model):
