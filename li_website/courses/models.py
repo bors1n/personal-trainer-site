@@ -61,13 +61,16 @@ class Course(models.Model):
 
     def get_embed_url(self):
         """
-        Convert YouTube or Rutube URL to embed URL format.
+        Convert YouTube, Rutube, or VK video URL to embed URL format.
         
-        Handles YouTube URLs (standard and shortened) and Rutube URLs.
+        Handles YouTube URLs (standard and shortened), Rutube URLs, and VK video URLs.
         
         Returns:
-            str: YouTube/Rutube embed URL or original URL if not a supported link
+            str: YouTube/Rutube/VK embed URL or original URL if not a supported link
         """
+        if not self.link_video:
+            return ''
+        
         # Handle YouTube links
         if 'youtube.com/watch?v=' in self.link_video:
             video_id = self.link_video.split('v=')[1].split('&')[0]
@@ -79,6 +82,11 @@ class Course(models.Model):
         elif 'rutube.ru/video/' in self.link_video:
             video_id = self.link_video.split('video/')[-1].rstrip('/')
             return f'https://rutube.ru/play/embed/{video_id}'
+        # Handle VK video links
+        elif 'vk.com/video' in self.link_video:
+            # Extract video IDs from URL (format: video-XXXXXXXX_XXXXXXXX)
+            video_parts = self.link_video.split('video')[-1].strip()
+            return f'https://vk.com/video_ext.php?oid={video_parts.split("_")[0]}&id={video_parts.split("_")[1]}&hd=1'
         return self.link_video
 
 class Purchase(models.Model):

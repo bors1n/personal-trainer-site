@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "valentine", "bumblebee", "winter"],
+    themes: ["light", "dark", "valentine", "cupcake"],
     base: true, // Applies background color and foreground color for root element
     styled: true, // Include daisyUI colors and design decisions
     utils: true, // Adds responsive and modifier utility classes
