@@ -83,10 +83,11 @@ class Course(models.Model):
             video_id = self.link_video.split('video/')[-1].rstrip('/')
             return f'https://rutube.ru/play/embed/{video_id}'
         # Handle VK video links
-        elif 'vk.com/video' in self.link_video:
-            # Extract video IDs from URL (format: video-XXXXXXXX_XXXXXXXX)
-            video_parts = self.link_video.split('video')[-1].strip()
-            return f'https://vk.com/video_ext.php?oid={video_parts.split("_")[0]}&id={video_parts.split("_")[1]}&hd=1'
+        elif 'vkvideo.ru/video-' in self.link_video:
+            # Extract video IDs from URL (format: video-XXXXXXXX_XXXXXXXXX)
+            video_full_id = self.link_video.split('video-')[1].split('?')[0]
+            owner_id, video_id = video_full_id.split('_')
+            return f'https://vkvideo.ru/video_ext.php?oid={owner_id}&id={video_id}&hd=2'
         return self.link_video
 
 class Purchase(models.Model):
