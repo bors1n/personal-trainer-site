@@ -61,34 +61,22 @@ class Course(models.Model):
 
     def get_embed_url(self):
         """
-        Convert YouTube, Rutube, or VK video URL to embed URL format.
+        Return the VK video embed URL.
         
-        Handles YouTube URLs (standard and shortened), Rutube URLs, and VK video URLs.
+        The link_video field should contain the complete VK embed URL in format:
+        https://vk.com/video_ext.php?oid=XXX&id=XXX&hd=2&hash=XXX
         
         Returns:
-            str: YouTube/Rutube/VK embed URL or original URL if not a supported link
+            str: VK video embed URL or empty string if no link
         """
         if not self.link_video:
             return ''
         
-        # Handle YouTube links
-        if 'youtube.com/watch?v=' in self.link_video:
-            video_id = self.link_video.split('v=')[1].split('&')[0]
-            return f'https://www.youtube.com/embed/{video_id}'
-        elif 'youtu.be/' in self.link_video:
-            video_id = self.link_video.split('/')[-1]
-            return f'https://www.youtube.com/embed/{video_id}'
-        # Handle Rutube links
-        elif 'rutube.ru/video/' in self.link_video:
-            video_id = self.link_video.split('video/')[-1].rstrip('/')
-            return f'https://rutube.ru/play/embed/{video_id}'
-        # Handle VK video links
-        elif 'vkvideo.ru/video-' in self.link_video:
-            # Extract video IDs from URL (format: video-XXXXXXXX_XXXXXXXXX)
-            video_full_id = self.link_video.split('video-')[1].split('?')[0]
-            owner_id, video_id = video_full_id.split('_')
-            return f'https://vkvideo.ru/video_ext.php?oid={owner_id}&id={video_id}&hd=2'
-        return self.link_video
+        # Return the URL directly if it's already in embed format
+        if 'video_ext.php' in self.link_video:
+            return self.link_video
+            
+        return ''
 
 class Purchase(models.Model):
     """
