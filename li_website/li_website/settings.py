@@ -203,9 +203,9 @@ AUTHENTICATION_BACKENDS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #yookassa 
-YOOKASSA_SHOP_ID = '499811' 
-YOOKASSA_SECRET_KEY = 'test_lt5IdRA0_c5dwgRhf23cj_7oy5jPzJttUs9Ve1JJPCY' 
-YOOKASSA_TEST_MODE = True
+YOOKASSA_SHOP_ID = os.getenv('YOOKASSA_SHOP_ID', '')
+YOOKASSA_SECRET_KEY = os.getenv('YOOKASSA_SECRET_KEY', '')
+YOOKASSA_TEST_MODE = os.getenv('YOOKASSA_TEST_MODE', 'False').lower() == 'true'
 
 SITE_ID = 1
 
