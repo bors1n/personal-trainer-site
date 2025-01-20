@@ -25,7 +25,7 @@ def create_payment(request):
             
             logger.info(f"Creating payment for user {request.user.id} with amount {amount}")
             
-            # Create payment in YooKassa
+            # Create payment in YooKassa with receipt
             payment = YooKassaPayment.create({
                 "amount": {
                     "value": str(amount),
@@ -40,6 +40,24 @@ def create_payment(request):
                 "metadata": {
                     "user_id": request.user.id,
                     "course_title": description.replace('Оплата курса: ', '')
+                },
+                "receipt": {
+                    "customer": {
+                        "email": request.user.email  # Get email from authenticated user
+                    },
+                    "items": [
+                        {
+                            "description": description.replace('Оплата курса: ', ''),
+                            "quantity": "1",
+                            "amount": {
+                                "value": str(amount),
+                                "currency": "RUB"
+                            },
+                            "vat_code": "6",  # НДС не облагается
+                            "payment_mode": "full_prepayment",
+                            "payment_subject": "service"
+                        }
+                    ]
                 }
             })
             
